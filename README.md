@@ -49,26 +49,27 @@ $sh test_rsa_key.sh #A test.
 - (NSData *)OpenSSL_RSA_DataWithPublicModulus:(NSData *)modulus exponent:(NSData *)exponent isDecrypt:(BOOL)isDecrypt;
 ```
 
-#### 5. Usage of RSA
+#### 5. Format convert class "QRFormatConvert"
+
+
+#### 6. Usage of RSA
 
 a. RSA + AES(Client[RSA PUB Enc AES] -> Server[RSA PRI Dec AES], Client[AES Enc/Dec DATA] <-> Server[AES Enc/Dec DATA]).
+
 b. RSA Enc and Dec.
 
 
-#### 6. Link error
+#### 7. Link error
 
 Project Settings add "Other Linker Flags" -all_load or -ObjC
 
 
-#### 7. Reference
+#### 8. Reference
 
 OpenSSL lib built from https://github.com/x2on/OpenSSL-for-iPhone
 
 http://www.jianshu.com/p/21bb11ff8e27
-
 https://www.openssl.org/docs/man1.0.1/crypto/i2d_RSA_PUBKEY.html
-
 https://github.com/StCredZero/SCZ-BasicEncodingRules-iOS
-
 http://www.techper.net/2012/06/01/converting-rsa-public-key-modulus-and-exponent-into-pem-file/
 
