@@ -69,7 +69,9 @@ Project Settings add "Other Linker Flags" -all_load or -ObjC
 OpenSSL lib built from https://github.com/x2on/OpenSSL-for-iPhone
 
 http://www.jianshu.com/p/21bb11ff8e27
-https://www.openssl.org/docs/man1.0.1/crypto/i2d_RSA_PUBKEY.html
-https://github.com/StCredZero/SCZ-BasicEncodingRules-iOS
-http://www.techper.net/2012/06/01/converting-rsa-public-key-modulus-and-exponent-into-pem-file/
 
+https://www.openssl.org/docs/man1.0.1/crypto/i2d_RSA_PUBKEY.html
+
+https://github.com/StCredZero/SCZ-BasicEncodingRules-iOS
+
+http://www.techper.net/2012/06/01/converting-rsa-public-key-modulus-and-exponent-into-pem-file/
