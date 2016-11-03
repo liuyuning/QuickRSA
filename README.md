@@ -28,11 +28,13 @@ $sh test_rsa_key.sh #Test
 ```
 
 
-Keychain API "SecItemAdd" and "SecItemCopyMatching" for getting SecKeyRef may return NULL(钥匙串函数"SecItemAdd"和"SecItemCopyMatching"获取SecKeyRef可能返回NULL).
+Keychain API "SecItemAdd" and "SecItemCopyMatching" for getting SecKeyRef may return NULL randomly.(钥匙串函数"SecItemAdd"和"SecItemCopyMatching"获取SecKeyRef可能返回NULL)
 
-The func +[QRSecCrypto RSASecKeyCopyWithPKCS1Data:appTag:isPublic:] not always return SecKeyRef.
+So the func +[QRSecCrypto RSASecKeyCopyWithPKCS1Data:appTag:isPublic:] may return NULL too. 
 
-The system log of SecItemXXX return NULL:
+If you can't accept this error, use OpenSSL instead or use +[QRSecCrypto RSASecKeyCopyWithDERData:isPublic:] for iOS10 and later.
+
+System log of SecItemXXX return NULL:
 ```txt
 Jul  7 18:51:48 iPhone securityd[212] <Error>:  securityd_xpc_dictionary_handler TestApp[780] copy_matching Error Domain=NSOSStatusErrorDomain Code=-34018 "client has neither application-identifier nor keychain-access-groups entitlements" UserInfo={NSDescription=client has neither application-identifier nor keychain-access-groups entitlements}
 Jul  7 18:51:48 iPhone TestApp[780] <Error>:  SecOSStatusWith error:[-34018] Error Domain=NSOSStatusErrorDomain Code=-34018 "client has neither application-identifier nor keychain-access-groups entitlements" UserInfo={NSDescription=client has neither application-identifier nor keychain-access-groups entitlements}
