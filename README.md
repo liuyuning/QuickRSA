@@ -2,7 +2,7 @@
 RSA Encrypt and Decrypt lib and demo for iOS (Using Security.framework and OpenSSL)
 
 
-#### 1. Run script gen_rsa_key.sh generate RSA keys.
+#### 1. Run script gen_rsa_key.sh to generate RSA keys.
 
 WARNING: DO NOT RELEASE "PRIVATE KEY" IN PACKAGE(注意：切记不要把私钥一起打包发布)
 
@@ -29,9 +29,10 @@ $sh test_rsa_key.sh #Test
 
 
 Keychain API "SecItemAdd" and "SecItemCopyMatching" for getting SecKeyRef may return NULL(钥匙串函数"SecItemAdd"和"SecItemCopyMatching"获取SecKeyRef可能返回NULL).
+
 The func +[QRSecCrypto RSASecKeyCopyWithPKCS1Data:appTag:isPublic:] not always return SecKeyRef.
 
-The system log of SecItemXXX return error:
+The system log of SecItemXXX return NULL:
 ```txt
 Jul  7 18:51:48 iPhone securityd[212] <Error>:  securityd_xpc_dictionary_handler TestApp[780] copy_matching Error Domain=NSOSStatusErrorDomain Code=-34018 "client has neither application-identifier nor keychain-access-groups entitlements" UserInfo={NSDescription=client has neither application-identifier nor keychain-access-groups entitlements}
 Jul  7 18:51:48 iPhone TestApp[780] <Error>:  SecOSStatusWith error:[-34018] Error Domain=NSOSStatusErrorDomain Code=-34018 "client has neither application-identifier nor keychain-access-groups entitlements" UserInfo={NSDescription=client has neither application-identifier nor keychain-access-groups entitlements}
@@ -76,15 +77,16 @@ Data <->Hex string
 
 #### 6. Link error
 
-Project Settings add "Other Linker Flags" -ObjC or -all_load
+  Project Settings add "Other Linker Flags" -ObjC or -all_load
 
 
 #### 7. Reference
 
- 1. https://github.com/x2on/OpenSSL-for-iPhone (OpenSSL lib）
- 2. http://www.jianshu.com/p/21bb11ff8e27
- 3. https://www.openssl.org/docs/man1.0.1/crypto/i2d_RSA_PUBKEY.html
- 4. https://github.com/StCredZero/SCZ-BasicEncodingRules-iOS
- 5. http://www.techper.net/2012/06/01/converting-rsa-public-key-modulus-and-exponent-into-pem-file/
- 6. http://www.dsm.fordham.edu/~mathai/openssl.html
- 7. https://gist.github.com/lvjian700/635368d6f1e421447680
+* https://github.com/x2on/OpenSSL-for-iPhone (OpenSSL lib）
+* https://github.com/StCredZero/SCZ-BasicEncodingRules-iOS
+* http://www.techper.net/2012/06/01/converting-rsa-public-key-modulus-and-exponent-into-pem-file/
+* http://www.jianshu.com/p/21bb11ff8e27
+* https://www.openssl.org/docs/man1.0.1/crypto/i2d_RSA_PUBKEY.html
+* https://gist.github.com/lvjian700/635368d6f1e421447680
+* http://www.dsm.fordham.edu/~mathai/openssl.html
+
