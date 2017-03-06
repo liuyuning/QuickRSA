@@ -18,3 +18,8 @@ xxd -ps test.txt.enc
 openssl rsautl -decrypt -inkey ../KEY/rsa_private_key.pem -in test.txt.enc -out test.txt.dec
 echo '[DEC]\c'
 cat test.txt.dec
+
+#Sign test
+#openssl rsautl -sign -inkey ../KEY/rsa_private_key.pem -in test.txt -out test.txt.sgn
+#echo '[SNG]'
+#xxd -ps test.txt.sgn

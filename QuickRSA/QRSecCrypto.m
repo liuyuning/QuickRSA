@@ -10,8 +10,8 @@
 
 @implementation QRSecCrypto
 
-//509 Cert
-+ (SecKeyRef)RSASecKeyPubCopyWithX509CertData:(NSData *)certData{
+//Public SecKeyRef from 509 Cert
++ (SecKeyRef)RSASecKeyCreatePublicWithX509CertData:(NSData *)certData{
     if (!certData) {
         return NULL;
     }
@@ -40,8 +40,8 @@
     return publicKey;
 }
 
-//P12
-+ (SecKeyRef)RSASecKeyPriCopyWithP12Data:(NSData *)p12Data password:(NSString *)password{
+//Private SecKeyRef from P12
++ (SecKeyRef)RSASecKeyCreatePrivateWithP12Data:(NSData *)p12Data password:(NSString *)password{
     
     if (!p12Data || !password) {
         return NULL;
@@ -81,7 +81,7 @@
 }
 
 //Use Keychain
-+ (SecKeyRef)RSASecKeyCopyWithPKCS1Data:(NSData *)pkcs1Data appTag:(NSString *)appTag isPublic:(BOOL)isPublic{
++ (SecKeyRef)RSASecKeyCreateWithData:(NSData *)pkcs1Data appTag:(NSString *)appTag isPublic:(BOOL)isPublic{
     if(!pkcs1Data || !appTag){
         return NULL;
     }
@@ -119,8 +119,19 @@
     return secKey;
 }
 
-//For iOS 10 and later
-+ (SecKeyRef)RSASecKeyCopyWithDERData:(NSData *)derData isPublic:(BOOL)isPublic{
+//Public SecKeyRef must use PKCS1 format data, get it form DER format use +[QRFormatConvert RSA_PUB_PKCS1FromDER:].
++ (SecKeyRef)RSASecKeyCreatePublicWithPKCS1Data:(NSData *)pkcs1Data appTag:(NSString *)appTag{
+    return [self RSASecKeyCreateWithData:pkcs1Data appTag:appTag isPublic:YES];
+}
+
+//Private SecKeyRef use DER format data directly. [DER format] == [PKCS1 format]
++ (SecKeyRef)RSASecKeyCreatePrivateWithDERData:(NSData *)derData appTag:(NSString *)appTag{
+    return [self RSASecKeyCreateWithData:derData appTag:appTag isPublic:NO];
+}
+
+
+//For iOS 10 and later, public key or private key.
++ (SecKeyRef)RSASecKeyCreateWithDERData_iOS10:(NSData *)derData isPublic:(BOOL)isPublic{
     if (!derData) {
         return NULL;
     }
@@ -148,10 +159,10 @@
 
 
 @implementation NSData(QRSecCrypto)
-- (NSData *)RSAEncryptDataWithPublicKey:(SecKeyRef)publicKey{
-    if (self.length && publicKey) {
+- (NSData *)RSAEncryptDataWithKey:(SecKeyRef)key isPublic:(BOOL)isPublic{
+    if (self.length && key) {
         
-        size_t blockSize = SecKeyGetBlockSize(publicKey);
+        size_t blockSize = SecKeyGetBlockSize(key);
         size_t cipherLen = blockSize;//Should set cipherLen before SecKeyEncrypt
         uint8_t *buffer = malloc(cipherLen);
         
@@ -170,12 +181,19 @@
                 }
                 
                 //memset(buffer, 0, cipherLen);
-                OSStatus status = SecKeyEncrypt(publicKey, kSecPaddingPKCS1, (uint8_t *)(plainData.bytes + offset), length, buffer, &cipherLen);
+                OSStatus status = errSecSuccess;
+                if (isPublic) {
+                    status = SecKeyEncrypt(key, kSecPaddingPKCS1, (uint8_t *)(plainData.bytes + offset), length, buffer, &cipherLen);
+                }
+                else{
+                    status = SecKeyRawSign(key, kSecPaddingPKCS1, (uint8_t *)(plainData.bytes + offset), length, buffer, &cipherLen);//kSecPaddingPKCS1SHA1
+                }
+                
                 if (errSecSuccess == status) {
                     [cipherData appendBytes:buffer length:cipherLen];
                 }
                 else{
-                    NSLog(@"SecKeyEncrypt status:%d",(int)status);
+                    NSLog(@"SecKeyEncrypt/SecKeyRawSign status:%d",(int)status);
                     cipherData = nil;
                     break;
                 }
@@ -190,11 +208,18 @@
     }
     return nil;
 }
+
+//Encrypt with public key
+- (NSData *)RSAEncryptDataWithPublicKey:(SecKeyRef)publicKey{
+    return [self RSAEncryptDataWithKey:publicKey isPublic:YES];
+}
+
+//Decrypt with private key
 - (NSData *)RSADecryptDataWithPrivateKey:(SecKeyRef)privateKey{
     if (self.length && privateKey) {
         
         size_t blockSize = SecKeyGetBlockSize(privateKey);
-        size_t plainLen = blockSize - 11;
+        size_t plainLen = blockSize;
         uint8_t *buffer = malloc(plainLen);
         
         if (buffer) {
@@ -205,6 +230,9 @@
             for (int i = 0; i < cipherData.length / blockSize; i++) {
                 
                 //memset(buffer, 0, plainLen);
+                
+                //1. Decrypt with public key and kSecPaddingPKCS1 will receive error code -9809. (errSSLCrypto = -9809, /* underlying cryptographic error */ SecureTransport.h)
+                //2. Decrypt with public key and kSecPaddingNone will success, but the decrypted data format incorrect!
                 OSStatus status = SecKeyDecrypt(privateKey, kSecPaddingPKCS1, (uint8_t *)(cipherData.bytes + blockSize * i), blockSize, buffer, &plainLen);
                 if (errSecSuccess == status) {
                     [plainData appendBytes:buffer length:plainLen];
@@ -222,4 +250,38 @@
     }
     return nil;
 }
+
+
+//Sign(Encrypt) with private key
+- (NSData *)RSASignDataWithPrivateKey:(SecKeyRef)privateKey{
+    return [self RSAEncryptDataWithKey:privateKey isPublic:NO];
+}
+
+//Verify with public key (Decrypt and Compare)
+- (BOOL)RSAVerifyWithRawData:(NSData *)rawData publicKey:(SecKeyRef)publicKey{
+    if (self.length && rawData.length && publicKey) {
+        
+        size_t blockSize = SecKeyGetBlockSize(publicKey);
+        size_t plainLen = blockSize - 11;
+        
+        NSData *cipherData = self;
+        
+        for (int i = 0; i < cipherData.length / blockSize; i++) {
+            
+            size_t inLen = rawData.length - plainLen * i;
+            if (inLen > plainLen) {
+                inLen = plainLen;
+            }
+            
+            OSStatus status = SecKeyRawVerify(publicKey, kSecPaddingPKCS1, rawData.bytes + plainLen * i, inLen, cipherData.bytes + blockSize * i, blockSize);
+            if (errSecSuccess != status) {
+                NSLog(@"SecKeyRawVerify status:%d",(int)status);
+                return NO;
+            }
+        }
+        return YES;
+    }
+    return NO;
+}
+
 @end

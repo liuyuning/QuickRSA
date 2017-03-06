@@ -16,23 +16,35 @@ $sh test_rsa_key.sh #Test
 
 ```objc
 @interface QRSecCrypto : NSObject
-//1. 509 Cert
-+ (SecKeyRef)RSASecKeyPubCopyWithX509CertData:(NSData *)certData;
-//2. Import P12 for private key
-+ (SecKeyRef)RSASecKeyPriCopyWithP12Data:(NSData *)p12Data password:(NSString *)password;
+//Call CFRelease() to free SecKeyRef.
+
+//1. Public SecKeyRef from 509 Cert
++ (SecKeyRef)RSASecKeyCreatePublicWithX509CertData:(NSData *)certData;
+//2. Private SecKeyRef from P12
++ (SecKeyRef)RSASecKeyCreatePrivateWithP12Data:(NSData *)p12Data password:(NSString *)password;
+
+
 //3. Use Keychain
-+ (SecKeyRef)RSASecKeyCopyWithPKCS1Data:(NSData *)pkcs1Data appTag:(NSString *)appTag isPublic:(BOOL)isPublic;
-//4. Use System API (For iOS 10 and later only)
-+ (SecKeyRef)RSASecKeyCopyWithDERData:(NSData *)derData isPublic:(BOOL)isPublic;
+//Turn On Keychain Sharing(Project - TARGETS - Capabilitys - Keychain Sharing - Switch On).
+//This API using SecItemXXX works with Keychain, may retrun nil if the Keychain can't access.
+
+//Public SecKeyRef must use PKCS1 format data, get it form DER format use +[QRFormatConvert RSA_PUB_PKCS1FromDER:]
++ (SecKeyRef)RSASecKeyCreatePublicWithPKCS1Data:(NSData *)pkcs1Data appTag:(NSString *)appTag;
+//Private SecKeyRef use DER format data directly. [DER format] == [PKCS1 format]
++ (SecKeyRef)RSASecKeyCreatePrivateWithDERData:(NSData *)derData appTag:(NSString *)appTag;
+
+
+//4. For iOS 10 and later, public key or private key.
++ (SecKeyRef)RSASecKeyCreateWithDERData_iOS10:(NSData *)derData isPublic:(BOOL)isPublic __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
 @end
 ```
 
 
 Keychain API "SecItemAdd" and "SecItemCopyMatching" for getting SecKeyRef may return NULL randomly.(钥匙串函数"SecItemAdd"和"SecItemCopyMatching"获取SecKeyRef可能返回NULL)
 
-So the func +[QRSecCrypto RSASecKeyCopyWithPKCS1Data:appTag:isPublic:] may return NULL too. 
+So the func +[QRSecCrypto RSASecKeyCreatePublicWithPKCS1Data:appTag:] and +[QRSecCrypto RSASecKeyCreatePrivateWithDERData:appTag:] may return NULL too. 
 
-If you can't accept this error, use OpenSSL instead or use +[QRSecCrypto RSASecKeyCopyWithDERData:isPublic:] for iOS10 and later.
+If you can't accept this error, use OpenSSL instead. Or use +[QRSecCrypto RSASecKeyCreateWithDERData_iOS10:isPublic:] for iOS10 and later.
 
 System log of SecItemXXX return NULL:
 ```txt
@@ -40,12 +52,17 @@ Jul  7 18:51:48 iPhone securityd[212] <Error>:  securityd_xpc_dictionary_handler
 Jul  7 18:51:48 iPhone TestApp[780] <Error>:  SecOSStatusWith error:[-34018] Error Domain=NSOSStatusErrorDomain Code=-34018 "client has neither application-identifier nor keychain-access-groups entitlements" UserInfo={NSDescription=client has neither application-identifier nor keychain-access-groups entitlements}
 ```
 
-#### 3. RSA Enc/Dec with SecKeyRef
+#### 3. RSA Enc/Dec/Sign/Verify with SecKeyRef
 
 ```objc
 @interface NSData(QRSecCrypto)
-- (NSData *)RSAEncryptDataWithPublicKey:(SecKeyRef)publicKey;
-- (NSData *)RSADecryptDataWithPrivateKey:(SecKeyRef)privateKey;
+//Default padding is kSecPaddingPKCS1
+
+- (NSData *)RSAEncryptDataWithPublicKey:(SecKeyRef)publicKey;//Encrypt with public key
+- (NSData *)RSADecryptDataWithPrivateKey:(SecKeyRef)privateKey;//Decrypt with private key
+
+- (NSData *)RSASignDataWithPrivateKey:(SecKeyRef)privateKey;//Sign(Encrypt) with private key
+- (BOOL)RSAVerifyWithRawData:(NSData *)rawData publicKey:(SecKeyRef)publicKey;//Verify with public key (Decrypt and Compare)
 @end
 ```
 
@@ -53,20 +70,68 @@ Jul  7 18:51:48 iPhone TestApp[780] <Error>:  SecOSStatusWith error:[-34018] Err
 
 ```objc
 @interface NSData(OpenSSL)
-//Use PEM, Pub(Pri) Enc -> Pri(Pub) Dec
+
+#if USE_OPENSSL
+//Default padding is RSA_PKCS1_PADDING
+
+//Use PEM format, Pub(Pri) Enc -> Pri(Pub) Dec
 - (NSData *)OpenSSL_RSA_EncryptDataWithPEM:(NSData *)pemData isPublic:(BOOL)isPublic;//PEM key
 - (NSData *)OpenSSL_RSA_DecryptDataWithPEM:(NSData *)pemData isPublic:(BOOL)isPublic;//PEM key
 
-//Use DER, Pub(Pri) Enc -> Pri(Pub) Dec
+//Use DER format, Pub(Pri) Enc -> Pri(Pub) Dec
 - (NSData *)OpenSSL_RSA_EncryptDataWithDER:(NSData *)derData isPublic:(BOOL)isPublic;//DER key
 - (NSData *)OpenSSL_RSA_DecryptDataWithDER:(NSData *)derData isPublic:(BOOL)isPublic;//DER key
 
-//Use modulus exponent
+//Use modulus and exponent
 - (NSData *)OpenSSL_RSA_DataWithPublicModulus:(NSData *)modulus exponent:(NSData *)exponent isDecrypt:(BOOL)isDecrypt;
+//- (NSData *)OpenSSL_RSA_DataWithPrivateModulus:...
 #endif
+
+@end
 ```
 
 #### 5. Format convert class "QRFormatConvert"
+
+```objc
+@interface QRFormatConvert : NSObject
+
++ (NSData *)DERFromPEM:(NSData *)pemData;//PEM to DER
++ (NSData *)PEMFromDER:(NSData *)derData header:(const char *)header;//DER to PEM, header such as PEM_STRING_RSA
+
+#if USE_OPENSSL
+//Public Key
++ (NSData *)RSA_PUB_ModulusFromDER:(NSData *)derData;   //Public key modulus
++ (NSData *)RSA_PUB_ExponentFromDER:(NSData *)derData;  //Public key exponent
+
++ (NSData *)RSA_PUB_PKCS1FromDER:(NSData *)derData;     //Public key PKCS1 format from DER
++ (NSData *)RSA_PUB_DERFromPKCS1:(NSData *)pkcs1Data;   //Public key DER format from PKCS1
+
++ (NSData *)RSA_PUB_PKCS1FromModulus:(NSData *)modulus exponent:(NSData *)exponent useDER:(BOOL)useDER; //Public key PKCS1 or DER from modulus and exponent
+
+//Private Key
+//[DER format] == [PKCS1 format]
++ (NSData *)RSA_PRI_DERFromModulus:(NSData *)modulus  //Private key DER format from components
+                       pubExponent:(NSData *)pubExponent
+                       priExponent:(NSData *)priExponent
+                            prime1:(NSData *)prime1
+                            prime2:(NSData *)prime2
+                         exponent1:(NSData *)exponent1
+                         exponent2:(NSData *)exponent2
+                       coefficient:(NSData *)coefficient;
+#endif
+@end
+
+//Hex
+@interface NSData(QuickRSA)
+- (NSString *)hexString;
+@end
+
+@interface NSString(QuickRSA)
+- (NSData *)dataFromHexString;
+@end
+
+```
+
 
 PEM <-> DER
 
@@ -91,4 +156,4 @@ Data <->Hex string
 * https://www.openssl.org/docs/man1.0.1/crypto/i2d_RSA_PUBKEY.html
 * https://gist.github.com/lvjian700/635368d6f1e421447680
 * http://www.dsm.fordham.edu/~mathai/openssl.html
-
+* http://stackoverflow.com/questions/6705928/encrypting-data-with-a-private-key-on-ios

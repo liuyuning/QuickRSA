@@ -91,6 +91,7 @@
     return plainData.length ? plainData : nil;
 }
 
+//Use PEM format, Pub(Pri) Enc -> Pri(Pub) Dec
 - (NSData *)OpenSSL_RSA_EncryptDataWithPEM:(NSData *)pemData isPublic:(BOOL)isPublic{
     //PEM_read_RSA_PUBKEY(FILE *fp, RSA **x, pem_password_cb *cb, void *u)
     //PEM_read_RSAPublicKey(FILE *fp, RSA **x, pem_password_cb *cb, void *u)
@@ -115,6 +116,7 @@
     }
     return outData;
 }
+//Use PEM format, Pub(Pri) Enc -> Pri(Pub) Dec
 - (NSData *)OpenSSL_RSA_DecryptDataWithPEM:(NSData *)pemData isPublic:(BOOL)isPublic{
     NSData *outData = nil;
     RSA *rsa = NULL;
@@ -132,6 +134,8 @@
     return outData;
 }
 
+
+//Use DER format, Pub(Pri) Enc -> Pri(Pub) Dec
 - (NSData *)OpenSSL_RSA_EncryptDataWithDER:(NSData *)derData isPublic:(BOOL)isPublic{
     
     if (!derData) {
@@ -151,6 +155,8 @@
     }
     return outData;
 }
+
+//Use DER format, Pub(Pri) Enc -> Pri(Pub) Dec
 - (NSData *)OpenSSL_RSA_DecryptDataWithDER:(NSData *)derData isPublic:(BOOL)isPublic{
     
     if (!derData) {
@@ -166,7 +172,7 @@
     return outData;
 }
 
-
+//Use modulus and exponent
 - (NSData *)OpenSSL_RSA_DataWithPublicModulus:(NSData *)modulus exponent:(NSData *)exponent isDecrypt:(BOOL)isDecrypt{
     
     if (!modulus || !exponent) {

@@ -13,12 +13,12 @@ echo '\033[0m'
 rm -rf KEY; mkdir KEY; pushd KEY
 
 #1. Private key
-openssl genrsa -out rsa_private_key.pem 1024 #PEM fromat
-openssl rsa -in rsa_private_key.pem -outform DER -out rsa_private_key.der #DER fromat
+openssl genrsa -out rsa_private_key.pem 1024 #PEM format
+openssl rsa -in rsa_private_key.pem -outform DER -out rsa_private_key.der #DER format
 
 #2. Public key
-openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem #PEM fromat
-openssl rsa -in rsa_private_key.pem -pubout -outform DER -out rsa_public_key.der #DER fromat
+openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem #PEM format
+openssl rsa -in rsa_private_key.pem -pubout -outform DER -out rsa_public_key.der #DER format
 #openssl rsa -in rsa_public_key.pem -pubin -outform DER -out rsa_public_key_.der #Same as upper
 
 #3. Modulus & Exponent
@@ -33,18 +33,18 @@ openssl asn1parse -in rsa_private_key.pem -i > rsa_modulus_exponent_asn1.txt
 echo '\033[0;31m'
 echo '== Input info of certificate request(输入证书请求的信息) =='
 echo '\033[0m'
-openssl req -new -key rsa_private_key.pem -out rsa_cert_req.pem #Another extension as 'rsa_cert_req.csr'. PEM fromat
+openssl req -new -key rsa_private_key.pem -out rsa_cert_req.pem #Another extension as 'rsa_cert_req.csr'. PEM format
 #openssl req -in rsa_cert_req.pem -text -noout #Show the content
-openssl x509 -req -days 3650 -in rsa_cert_req.pem -signkey rsa_private_key.pem -out rsa_cert_cert.pem #Another extension as 'rsa_cert_cert.cer'. PEM fromat
+openssl x509 -req -days 3650 -in rsa_cert_req.pem -signkey rsa_private_key.pem -out rsa_cert_cert.pem #Another extension as 'rsa_cert_cert.cer'. PEM format
 #openssl x509 -in rsa_cert_cert.pem -text -noout #Show the content
 openssl x509 -in rsa_cert_cert.pem -outform DER -out rsa_cert_cert.der #Convert PEM to DER
 
 #Print Apple CA
-#openssl x509 -in AppleWWDRCA.cer -inform DER -text -noout #DER fromat
+#openssl x509 -in AppleWWDRCA.cer -inform DER -text -noout #DER format
 #openssl x509 -in AppleWWDRCA.cer -inform DER -out AppleWWDRCA.pem -outform PEM
 
 #5. PKCS#8 & #12
-openssl pkcs8 -topk8 -in rsa_private_key.pem -nocrypt -out rsa_private_key_pk8.pem #For Java PEM fromat
+openssl pkcs8 -topk8 -in rsa_private_key.pem -nocrypt -out rsa_private_key_pk8.pem #For Java PEM format
 echo '\033[0;31m'
 echo '\n== Input password for p12(输入密码给p12加密) =='
 echo '\033[0m'

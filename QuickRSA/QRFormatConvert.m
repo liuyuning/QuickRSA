@@ -15,6 +15,7 @@
 #endif
 
 @implementation QRFormatConvert
+//PEM to DER
 + (NSData *)DERFromPEM:(NSData *)pemData{
     NSRange range1 = [pemData rangeOfData:[NSData dataWithBytes:"-----\n" length:6] options:0 range:NSMakeRange(0, pemData.length)];
     NSRange range2 = [pemData rangeOfData:[NSData dataWithBytes:"\n-----" length:6] options:0 range:NSMakeRange(0, pemData.length)];
@@ -26,7 +27,7 @@
     }
     return nil;
 }
-
+//DER to PEM, header such as PEM_STRING_RSA
 + (NSData *)PEMFromDER:(NSData *)derData header:(const char *)header{
     NSString *base64 = [derData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength | NSDataBase64EncodingEndLineWithLineFeed];
     NSString *pemString = [NSString stringWithFormat:@"-----BEGIN %s-----\n%@\n-----END %s-----\n",header,base64,header];
@@ -35,7 +36,7 @@
 
 
 #if USE_OPENSSL
-//Pub
+//Public key modulus
 + (NSData *)RSA_PUB_ModulusFromDER:(NSData *)derData{
     
     if (!derData) {
@@ -59,7 +60,7 @@
     }
     return data;
 }
-
+//Public key exponent
 + (NSData *)RSA_PUB_ExponentFromDER:(NSData *)derData{
     if (!derData) {
         return nil;
@@ -83,6 +84,7 @@
     return data;
 }
 
+//Public key PKCS1 format from DER
 + (NSData *)RSA_PUB_PKCS1FromDER:(NSData *)derData{
     if (!derData) {
         return nil;
@@ -105,6 +107,7 @@
     return data;
 }
 
+//Public key DER format from PKCS1
 + (NSData *)RSA_PUB_DERFromPKCS1:(NSData *)pkcs1Data{
     if (!pkcs1Data) {
         return nil;
@@ -127,6 +130,7 @@
     return data;
 }
 
+////Public key PKCS1 or DER from modulus and exponent
 + (NSData *)RSA_PUB_PKCS1FromModulus:(NSData *)modulus exponent:(NSData *)exponent useDER:(BOOL)useDER{
     if (!modulus || !exponent) {
         return nil;
@@ -170,15 +174,15 @@
     return keyData;
 }
 
-//Pri
-+ (NSData *)RSA_PRI_PKCS1FromModulus:(NSData *)modulus
-                         pubExponent:(NSData *)pubExponent
-                         priExponent:(NSData *)priExponent
-                              prime1:(NSData *)prime1
-                              prime2:(NSData *)prime2
-                           exponent1:(NSData *)exponent1
-                           exponent2:(NSData *)exponent2
-                         coefficient:(NSData *)coefficient
+//Private key DER format from components
++ (NSData *)RSA_PRI_DERFromModulus:(NSData *)modulus
+                       pubExponent:(NSData *)pubExponent
+                       priExponent:(NSData *)priExponent
+                            prime1:(NSData *)prime1
+                            prime2:(NSData *)prime2
+                         exponent1:(NSData *)exponent1
+                         exponent2:(NSData *)exponent2
+                       coefficient:(NSData *)coefficient
 {
     
     if (!modulus || !pubExponent || !(priExponent || (prime1 && prime2 && exponent1 && exponent2 && coefficient))) {

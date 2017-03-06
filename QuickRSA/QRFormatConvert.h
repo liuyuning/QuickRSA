@@ -47,23 +47,24 @@
 
 #if USE_OPENSSL
 //Public Key
-+ (NSData *)RSA_PUB_ModulusFromDER:(NSData *)derData;//Public key modulus
-+ (NSData *)RSA_PUB_ExponentFromDER:(NSData *)derData;//Public key exponent
++ (NSData *)RSA_PUB_ModulusFromDER:(NSData *)derData;   //Public key modulus
++ (NSData *)RSA_PUB_ExponentFromDER:(NSData *)derData;  //Public key exponent
 
-+ (NSData *)RSA_PUB_PKCS1FromDER:(NSData *)derData;//Public key fromat DER to PKCS1
-+ (NSData *)RSA_PUB_DERFromPKCS1:(NSData *)pkcs1Data;//Public key fromat PKCS1 to DER
++ (NSData *)RSA_PUB_PKCS1FromDER:(NSData *)derData;     //Public key PKCS1 format from DER
++ (NSData *)RSA_PUB_DERFromPKCS1:(NSData *)pkcs1Data;   //Public key DER format from PKCS1
 
-+ (NSData *)RSA_PUB_PKCS1FromModulus:(NSData *)modulus exponent:(NSData *)exponent useDER:(BOOL)useDER;//Public key PKCS1 or DER from modulus and exponent
++ (NSData *)RSA_PUB_PKCS1FromModulus:(NSData *)modulus exponent:(NSData *)exponent useDER:(BOOL)useDER; //Public key PKCS1 or DER from modulus and exponent
 
 //Private Key
-+ (NSData *)RSA_PRI_PKCS1FromModulus:(NSData *)modulus //Get private key PKCS1 from components
-                         pubExponent:(NSData *)pubExponent
-                         priExponent:(NSData *)priExponent
-                              prime1:(NSData *)prime1
-                              prime2:(NSData *)prime2
-                           exponent1:(NSData *)exponent1
-                           exponent2:(NSData *)exponent2
-                         coefficient:(NSData *)coefficient;
+//[DER format] == [PKCS1 format]
++ (NSData *)RSA_PRI_DERFromModulus:(NSData *)modulus  //Private key DER format from components
+                       pubExponent:(NSData *)pubExponent
+                       priExponent:(NSData *)priExponent
+                            prime1:(NSData *)prime1
+                            prime2:(NSData *)prime2
+                         exponent1:(NSData *)exponent1
+                         exponent2:(NSData *)exponent2
+                       coefficient:(NSData *)coefficient;
 #endif
 @end
 
