@@ -26,7 +26,7 @@ $sh test_rsa_key.sh #Test
 
 //3. Use Keychain
 //Turn On Keychain Sharing(Project - TARGETS - Capabilitys - Keychain Sharing - Switch On).
-//This API using SecItemXXX works with Keychain, may retrun nil if the Keychain can't access.
+//This API using SecItemXXX works with Keychain, may retrun nil if the Keychain can't access. In that case you can use OpenSSL instand of SecItem.
 
 //Public SecKeyRef must use PKCS1 format data, get it form DER format use +[QRFormatConvert RSA_PUB_PKCS1FromDER:]
 + (SecKeyRef)RSASecKeyCreatePublicWithPKCS1Data:(NSData *)pkcs1Data appTag:(NSString *)appTag;
@@ -40,7 +40,7 @@ $sh test_rsa_key.sh #Test
 ```
 
 
-Keychain API "SecItemAdd" and "SecItemCopyMatching" for getting SecKeyRef may return NULL randomly.(钥匙串函数"SecItemAdd"和"SecItemCopyMatching"获取SecKeyRef可能返回NULL)
+Keychain API "SecItemAdd" and "SecItemCopyMatching" for getting SecKeyRef may return NULL randomly. In that case you can use OpenSSL instand of SecItem.(钥匙串函数"SecItemAdd"和"SecItemCopyMatching"获取SecKeyRef可能返回NULL，这样的话只能使用OpenSSL来代替)
 
 So the func +[QRSecCrypto RSASecKeyCreatePublicWithPKCS1Data:appTag:] and +[QRSecCrypto RSASecKeyCreatePrivateWithDERData:appTag:] may return NULL too. 
 
@@ -146,8 +146,12 @@ Data <->Hex string
 
   Project Settings add "Other Linker Flags" -ObjC or -all_load
 
+#### 7. Demo preview
+<!--![](ScreenShotDemo.png)-->
+<img src="ScreenShotDemo.png" width = 375 border="1" bordercolor="#000000"/>
 
-#### 7. Reference
+
+#### 8. Reference
 
 * https://github.com/x2on/OpenSSL-for-iPhone (OpenSSL lib）
 * https://github.com/StCredZero/SCZ-BasicEncodingRules-iOS

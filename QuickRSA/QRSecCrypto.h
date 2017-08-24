@@ -19,7 +19,7 @@
 
 //3. Use Keychain
 //Turn On Keychain Sharing(Project - TARGETS - Capabilitys - Keychain Sharing - Switch On).
-//This API using SecItemXXX works with Keychain, may retrun nil if the Keychain can't access.
+//This API using SecItemXXX works with Keychain, may retrun nil if the Keychain can't access. In that case you can use OpenSSL instand of SecItem.
 
 //Public SecKeyRef must use PKCS1 format data, get it form DER format use +[QRFormatConvert RSA_PUB_PKCS1FromDER:]
 + (SecKeyRef)RSASecKeyCreatePublicWithPKCS1Data:(NSData *)pkcs1Data appTag:(NSString *)appTag;
