@@ -1,0 +1,9 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '8.0'
+
+
+target 'QuickRSADemo' do
+  use_frameworks!
+  pod 'QuickRSA'
+  # pod 'OpenSSL-Universal', "~> 1.0", :subspecs => %w[Framework]
+end

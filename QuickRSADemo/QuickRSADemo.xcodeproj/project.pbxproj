@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		271EFC8D2713DDA103EFC94C /* Pods_QuickRSADemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE0A51719F4B936D7DE955A /* Pods_QuickRSADemo.framework */; };
+		61B6FAE31DC4BFE400F386D4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B6FAE21DC4BFE400F386D4 /* main.m */; };
+		61B6FAE61DC4BFE400F386D4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B6FAE51DC4BFE400F386D4 /* AppDelegate.m */; };
+		61B6FAE91DC4BFE400F386D4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B6FAE81DC4BFE400F386D4 /* ViewController.m */; };
+		61B6FAEC1DC4BFE400F386D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FAEA1DC4BFE400F386D4 /* Main.storyboard */; };
+		61B6FAEE1DC4BFE400F386D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FAED1DC4BFE400F386D4 /* Assets.xcassets */; };
+		61B6FAF11DC4BFE400F386D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FAEF1DC4BFE400F386D4 /* LaunchScreen.storyboard */; };
+		61B6FB081DC4C12D00F386D4 /* rsa_cert_cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FAFD1DC4C12D00F386D4 /* rsa_cert_cert.der */; };
+		61B6FB091DC4C12D00F386D4 /* rsa_cert_cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FAFE1DC4C12D00F386D4 /* rsa_cert_cert.pem */; };
+		61B6FB0A1DC4C12D00F386D4 /* rsa_cert_req.pem in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FAFF1DC4C12D00F386D4 /* rsa_cert_req.pem */; };
+		61B6FB0B1DC4C12D00F386D4 /* rsa_modulus_exponent.txt in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FB001DC4C12D00F386D4 /* rsa_modulus_exponent.txt */; };
+		61B6FB0C1DC4C12D00F386D4 /* rsa_modulus_exponent_asn1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FB011DC4C12D00F386D4 /* rsa_modulus_exponent_asn1.txt */; };
+		61B6FB0D1DC4C12D00F386D4 /* rsa_private_key.der in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FB021DC4C12D00F386D4 /* rsa_private_key.der */; };
+		61B6FB0E1DC4C12D00F386D4 /* rsa_private_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FB031DC4C12D00F386D4 /* rsa_private_key.pem */; };
+		61B6FB0F1DC4C12D00F386D4 /* rsa_private_key_p12.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FB041DC4C12D00F386D4 /* rsa_private_key_p12.p12 */; };
+		61B6FB101DC4C12D00F386D4 /* rsa_private_key_pk8.pem in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FB051DC4C12D00F386D4 /* rsa_private_key_pk8.pem */; };
+		61B6FB111DC4C12D00F386D4 /* rsa_public_key.der in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FB061DC4C12D00F386D4 /* rsa_public_key.der */; };
+		61B6FB121DC4C12D00F386D4 /* rsa_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 61B6FB071DC4C12D00F386D4 /* rsa_public_key.pem */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		065C1359AB71C34A7779BC8C /* Pods-QuickRSADemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickRSADemo.release.xcconfig"; path = "Target Support Files/Pods-QuickRSADemo/Pods-QuickRSADemo.release.xcconfig"; sourceTree = "<group>"; };
+		2CE0A51719F4B936D7DE955A /* Pods_QuickRSADemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuickRSADemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		61B6FADF1DC4BFE300F386D4 /* QuickRSADemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickRSADemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		61B6FAE21DC4BFE400F386D4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		61B6FAE41DC4BFE400F386D4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		61B6FAE51DC4BFE400F386D4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		61B6FAE71DC4BFE400F386D4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		61B6FAE81DC4BFE400F386D4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		61B6FAEB1DC4BFE400F386D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		61B6FAED1DC4BFE400F386D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		61B6FAF01DC4BFE400F386D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		61B6FAF21DC4BFE400F386D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61B6FAFD1DC4C12D00F386D4 /* rsa_cert_cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = rsa_cert_cert.der; sourceTree = "<group>"; };
+		61B6FAFE1DC4C12D00F386D4 /* rsa_cert_cert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_cert_cert.pem; sourceTree = "<group>"; };
+		61B6FAFF1DC4C12D00F386D4 /* rsa_cert_req.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_cert_req.pem; sourceTree = "<group>"; };
+		61B6FB001DC4C12D00F386D4 /* rsa_modulus_exponent.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_modulus_exponent.txt; sourceTree = "<group>"; };
+		61B6FB011DC4C12D00F386D4 /* rsa_modulus_exponent_asn1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_modulus_exponent_asn1.txt; sourceTree = "<group>"; };
+		61B6FB021DC4C12D00F386D4 /* rsa_private_key.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = rsa_private_key.der; sourceTree = "<group>"; };
+		61B6FB031DC4C12D00F386D4 /* rsa_private_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_private_key.pem; sourceTree = "<group>"; };
+		61B6FB041DC4C12D00F386D4 /* rsa_private_key_p12.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = rsa_private_key_p12.p12; sourceTree = "<group>"; };
+		61B6FB051DC4C12D00F386D4 /* rsa_private_key_pk8.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_private_key_pk8.pem; sourceTree = "<group>"; };
+		61B6FB061DC4C12D00F386D4 /* rsa_public_key.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = rsa_public_key.der; sourceTree = "<group>"; };
+		61B6FB071DC4C12D00F386D4 /* rsa_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_public_key.pem; sourceTree = "<group>"; };
+		61B6FB141DC4C9F700F386D4 /* QuickRSADemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = QuickRSADemo.entitlements; sourceTree = "<group>"; };
+		7FB1C6D07E5EA1C0D6FD33E1 /* Pods-QuickRSADemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickRSADemo.debug.xcconfig"; path = "Target Support Files/Pods-QuickRSADemo/Pods-QuickRSADemo.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		61B6FADC1DC4BFE300F386D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				271EFC8D2713DDA103EFC94C /* Pods_QuickRSADemo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		34DCC88973CAD2357EEABFA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2CE0A51719F4B936D7DE955A /* Pods_QuickRSADemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		61B6FA641DC4BDB700F386D4 = {
+			isa = PBXGroup;
+			children = (
+				61B6FAE01DC4BFE400F386D4 /* QuickRSADemo */,
+				61B6FA6E1DC4BDB700F386D4 /* Products */,
+				A5247DFE98666656DF059F07 /* Pods */,
+				34DCC88973CAD2357EEABFA7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		61B6FA6E1DC4BDB700F386D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				61B6FADF1DC4BFE300F386D4 /* QuickRSADemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		61B6FAE01DC4BFE400F386D4 /* QuickRSADemo */ = {
+			isa = PBXGroup;
+			children = (
+				61B6FAFC1DC4C12D00F386D4 /* KEY */,
+				61B6FAE41DC4BFE400F386D4 /* AppDelegate.h */,
+				61B6FAE51DC4BFE400F386D4 /* AppDelegate.m */,
+				61B6FAE71DC4BFE400F386D4 /* ViewController.h */,
+				61B6FAE81DC4BFE400F386D4 /* ViewController.m */,
+				61B6FAEA1DC4BFE400F386D4 /* Main.storyboard */,
+				61B6FAEF1DC4BFE400F386D4 /* LaunchScreen.storyboard */,
+				61B6FAED1DC4BFE400F386D4 /* Assets.xcassets */,
+				61B6FB141DC4C9F700F386D4 /* QuickRSADemo.entitlements */,
+				61B6FAF21DC4BFE400F386D4 /* Info.plist */,
+				61B6FAE21DC4BFE400F386D4 /* main.m */,
+			);
+			path = QuickRSADemo;
+			sourceTree = "<group>";
+		};
+		61B6FAFC1DC4C12D00F386D4 /* KEY */ = {
+			isa = PBXGroup;
+			children = (
+				61B6FAFD1DC4C12D00F386D4 /* rsa_cert_cert.der */,
+				61B6FAFE1DC4C12D00F386D4 /* rsa_cert_cert.pem */,
+				61B6FAFF1DC4C12D00F386D4 /* rsa_cert_req.pem */,
+				61B6FB001DC4C12D00F386D4 /* rsa_modulus_exponent.txt */,
+				61B6FB011DC4C12D00F386D4 /* rsa_modulus_exponent_asn1.txt */,
+				61B6FB021DC4C12D00F386D4 /* rsa_private_key.der */,
+				61B6FB031DC4C12D00F386D4 /* rsa_private_key.pem */,
+				61B6FB041DC4C12D00F386D4 /* rsa_private_key_p12.p12 */,
+				61B6FB051DC4C12D00F386D4 /* rsa_private_key_pk8.pem */,
+				61B6FB061DC4C12D00F386D4 /* rsa_public_key.der */,
+				61B6FB071DC4C12D00F386D4 /* rsa_public_key.pem */,
+			);
+			path = KEY;
+			sourceTree = "<group>";
+		};
+		A5247DFE98666656DF059F07 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7FB1C6D07E5EA1C0D6FD33E1 /* Pods-QuickRSADemo.debug.xcconfig */,
+				065C1359AB71C34A7779BC8C /* Pods-QuickRSADemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		61B6FADE1DC4BFE300F386D4 /* QuickRSADemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61B6FAF31DC4BFE400F386D4 /* Build configuration list for PBXNativeTarget "QuickRSADemo" */;
+			buildPhases = (
+				CFF267A004A5223E7E2210DB /* [CP] Check Pods Manifest.lock */,
+				61B6FADB1DC4BFE300F386D4 /* Sources */,
+				61B6FADC1DC4BFE300F386D4 /* Frameworks */,
+				61B6FADD1DC4BFE300F386D4 /* Resources */,
+				39EA04EDB303E6298A448267 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuickRSADemo;
+			productName = QuickRSADemo;
+			productReference = 61B6FADF1DC4BFE300F386D4 /* QuickRSADemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		61B6FA651DC4BDB700F386D4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = liuyuning;
+				TargetAttributes = {
+					61B6FADE1DC4BFE300F386D4 = {
+						CreatedOnToolsVersion = 7.2.1;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 61B6FA681DC4BDB700F386D4 /* Build configuration list for PBXProject "QuickRSADemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+				Base,
+			);
+			mainGroup = 61B6FA641DC4BDB700F386D4;
+			productRefGroup = 61B6FA6E1DC4BDB700F386D4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				61B6FADE1DC4BFE300F386D4 /* QuickRSADemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		61B6FADD1DC4BFE300F386D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61B6FB091DC4C12D00F386D4 /* rsa_cert_cert.pem in Resources */,
+				61B6FB0D1DC4C12D00F386D4 /* rsa_private_key.der in Resources */,
+				61B6FAF11DC4BFE400F386D4 /* LaunchScreen.storyboard in Resources */,
+				61B6FB0A1DC4C12D00F386D4 /* rsa_cert_req.pem in Resources */,
+				61B6FB111DC4C12D00F386D4 /* rsa_public_key.der in Resources */,
+				61B6FB0C1DC4C12D00F386D4 /* rsa_modulus_exponent_asn1.txt in Resources */,
+				61B6FB0E1DC4C12D00F386D4 /* rsa_private_key.pem in Resources */,
+				61B6FAEE1DC4BFE400F386D4 /* Assets.xcassets in Resources */,
+				61B6FB081DC4C12D00F386D4 /* rsa_cert_cert.der in Resources */,
+				61B6FB0B1DC4C12D00F386D4 /* rsa_modulus_exponent.txt in Resources */,
+				61B6FB101DC4C12D00F386D4 /* rsa_private_key_pk8.pem in Resources */,
+				61B6FB0F1DC4C12D00F386D4 /* rsa_private_key_p12.p12 in Resources */,
+				61B6FB121DC4C12D00F386D4 /* rsa_public_key.pem in Resources */,
+				61B6FAEC1DC4BFE400F386D4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		39EA04EDB303E6298A448267 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-QuickRSADemo/Pods-QuickRSADemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/QuickRSA/QuickRSA.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QuickRSA.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QuickRSADemo/Pods-QuickRSADemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CFF267A004A5223E7E2210DB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuickRSADemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		61B6FADB1DC4BFE300F386D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61B6FAE91DC4BFE400F386D4 /* ViewController.m in Sources */,
+				61B6FAE61DC4BFE400F386D4 /* AppDelegate.m in Sources */,
+				61B6FAE31DC4BFE400F386D4 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		61B6FAEA1DC4BFE400F386D4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				61B6FAEB1DC4BFE400F386D4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		61B6FAEF1DC4BFE400F386D4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				61B6FAF01DC4BFE400F386D4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		61B6FA741DC4BDB800F386D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		61B6FA751DC4BDB800F386D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		61B6FAF41DC4BFE400F386D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FB1C6D07E5EA1C0D6FD33E1 /* Pods-QuickRSADemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QuickRSADemo/QuickRSADemo.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = QuickRSADemo/Info.plist;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.liuyuning.QuickRSADemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Debug;
+		};
+		61B6FAF51DC4BFE400F386D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 065C1359AB71C34A7779BC8C /* Pods-QuickRSADemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = QuickRSADemo/QuickRSADemo.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = QuickRSADemo/Info.plist;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.liuyuning.QuickRSADemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		61B6FA681DC4BDB700F386D4 /* Build configuration list for PBXProject "QuickRSADemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61B6FA741DC4BDB800F386D4 /* Debug */,
+				61B6FA751DC4BDB800F386D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61B6FAF31DC4BFE400F386D4 /* Build configuration list for PBXNativeTarget "QuickRSADemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61B6FAF41DC4BFE400F386D4 /* Debug */,
+				61B6FAF51DC4BFE400F386D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 61B6FA651DC4BDB700F386D4 /* Project object */;
+}

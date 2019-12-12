@@ -1,0 +1,18 @@
+PODS:
+  - QuickRSA (0.0.1):
+    - QuickRSA/Static (= 0.0.1)
+  - QuickRSA/Static (0.0.1)
+
+DEPENDENCIES:
+  - QuickRSA
+
+SPEC REPOS:
+  trunk:
+    - QuickRSA
+
+SPEC CHECKSUMS:
+  QuickRSA: 6d8145068880e13f9e6745bc9e440aaccada1cc0
+
+PODFILE CHECKSUM: 04b665959cedfaf3ad0524ac418ec1e906f81c58
+
+COCOAPODS: 1.8.4
